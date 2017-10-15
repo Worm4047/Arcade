@@ -10,13 +10,12 @@ Local
 
 1. Clone this repo
 
-$ git clone https://github.com/Worm4047/Arcade
+	$ git clone https://github.com/Worm4047/Arcade
 
 2. Serve the application
 
-$ python -m SimpleHTTPServer
-Detailed Python Simple Server instructions can been found here.
+	$ python -m SimpleHTTPServer
 
 3. Open the application
 
-$ open "http://localhost:8000"
+	$ open "http://localhost:8000"
