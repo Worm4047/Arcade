@@ -19,3 +19,12 @@ Local
 3. Open the application
 
 	$ open "http://localhost:8000"
+
+4. Or simply, open the index.html file :p
+
+## Instructions to play the game
+
+1. The game is to be played using arrow keys, i.e up, down, left and right.
+2. Any collision would set the score to 0 and reset the game.
+3. On reaching the river, the player gets 40 points and starts again.
+4. Once you reach 200 points you win the game.
