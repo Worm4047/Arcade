@@ -1,7 +1,7 @@
+"use strict";
+var ENEMYPOSITIONS = [60, 140, 220];
 // Enemies our player must avoid
-
-var enemyPosition = [60, 140, 220];
-var score = 200;
+var win = 200;
 var Enemy = function(x,y,s) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
@@ -20,7 +20,7 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-    this.x += Math.floor(this.s*dt);
+    this.x += this.s*dt;
     if(this.x > 504){
         this.x = -100;
         this.y = enemyPosition[Math.floor(Math.random() * enemyPosition.length)];
@@ -31,7 +31,7 @@ Enemy.prototype.update = function(dt) {
     if(dx < 30 && dy < 30){
         player.x = 200;
         player.y = 380;
-        this.score = 0;
+        player.score = 0;
     }
 };
 
@@ -48,7 +48,6 @@ var Player = function(x,y,s){
     this.y = y;
     this.s = s;
     this.sprite = 'images/char-boy.png';
-    this.lives = 5;
     this.score = 0;
 }
 
@@ -67,8 +66,8 @@ Player.prototype.update = function(){
     }
     // Check for player reaching top of canvas and winning the game
     if (this.y < 0) {
-        this.score += 1;
-        if(this.score == score){
+        this.score += 40;
+        if(this.score == win){
             swal("Hoorayy !!", "You won!", "success");
             this.score = 10;
         }
@@ -97,7 +96,7 @@ Player.prototype.handleInput = function(e){
 var allEnemies = new Array();
 var player = new Player(200,380,50);
 var enemy;
-enemyPosition.forEach(function(posY) {
+ENEMYPOSITIONS.forEach(function(posY) {
     enemy = new Enemy(0, posY, 100 + Math.floor(Math.random() * 512));
     allEnemies.push(enemy);
 });
@@ -105,38 +104,6 @@ console.log(allEnemies);
 console.log(player);
 var POSITION_X  = [0, 100, 200, 300, 400, 500, 600];
 var POSITION_Y = [160, 230, 310, 390];
-var gemsColor = ['blue','green','orange'];
-var gemsSprite ={
-    'blue' : 'images/gem-blue.png',
-    'green' : 'images/gem-green.png',
-    'orange' : 'images/gem-orange.png'
-}
-var gemPoints = {
-    'blue' : 30,
-    'green' : 40,
-    'orange' : 50 
-};
-var Gem = function(x,y,color){
-    this.x = x;
-    this.y = y;
-    this.color = color;
-    this.sprite = gemsSprite[color];
-}
-
-Gem.prototype.update = function(){
-    var dx = Math.abs(this.x - player.x);
-    var dy = Math.abs(this.y - player.y);
-    player.score += gemPoints[this.color];
-    if(dx<20 && dy<30){
-        this.x = gemsX[Math.floor(Math.random()*gemsX.length)];
-        this.y = gemsY[Math.floor(Math.random()*gemsY.length)];
-    }
-}
-
-Gem.prototype.render = function(){
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y,50,50);
-}
-
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
