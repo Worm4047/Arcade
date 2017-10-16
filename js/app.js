@@ -23,7 +23,7 @@ Enemy.prototype.update = function(dt) {
     this.x += this.s*dt;
     if(this.x > 504){
         this.x = -100;
-        this.y = enemyPosition[Math.floor(Math.random() * enemyPosition.length)];
+        this.y = ENEMYPOSITIONS[Math.floor(Math.random() * ENEMYPOSITIONS.length)];
         this.speed = 100 + Math.floor(Math.random() * 512);
     }
     var dx = Math.abs(this.x - player.x);
